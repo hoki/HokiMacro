@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Express 2012 for Windows Desktop
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HokiMacroLib", "HokiLogger\HokiMacroLib.csproj", "{8EEBB423-D2E5-4258-B0DF-DF63F6F75A67}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HokiMacro", "HokiMacro\HokiMacro.csproj", "{F9FC099D-0735-4599-A171-B636BB3FDC12}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8EEBB423-D2E5-4258-B0DF-DF63F6F75A67}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8EEBB423-D2E5-4258-B0DF-DF63F6F75A67}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8EEBB423-D2E5-4258-B0DF-DF63F6F75A67}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8EEBB423-D2E5-4258-B0DF-DF63F6F75A67}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F9FC099D-0735-4599-A171-B636BB3FDC12}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F9FC099D-0735-4599-A171-B636BB3FDC12}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F9FC099D-0735-4599-A171-B636BB3FDC12}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F9FC099D-0735-4599-A171-B636BB3FDC12}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
