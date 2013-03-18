@@ -95,11 +95,11 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="bin\Debug\" />
+    <Folder Include="Resources\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Resources\off.wav" />
-    <Content Include="Resources\on.wav" />
+    <Content Include="bin\Debug\off.wav" />
+    <Content Include="bin\Debug\on.wav" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
