@@ -70,30 +70,34 @@ namespace HokiMacroLib
         private void mainSavageAttackSequence(KeyArgs keyArgs)
         {
             int pressDuration = 5;
-            int sleeptime = 15;
+            int sleepMin = 10;
+            int sleepMax = 18;
             TimeSpan diff;
             diff = DateTime.Now - lastCastSavageBuffsDT;
             if (!keyArgs.KeyUp && ProcessMacros)
             {
-                KeySim.KeyPress((byte)key.one, pressDuration);
-                Thread.Sleep(sleeptime);
-                KeySim.KeyPress((byte)key.two, pressDuration);
-                Thread.Sleep(sleeptime);
+
                 KeySim.KeyPress((byte)key.three, pressDuration);
-                Thread.Sleep(sleeptime);
+                sleep(sleepMin, sleepMax);
                 KeySim.KeyPress((byte)key.four, pressDuration);
-                Thread.Sleep(sleeptime);
-                KeySim.KeyPress((byte)key.five, pressDuration);
-                Thread.Sleep(sleeptime);
+                sleep(sleepMin, sleepMax);
+                KeySim.KeyPress((byte)key.four, pressDuration);
+                sleep(sleepMin, sleepMax);
+                KeySim.KeyPress((byte)key.four, pressDuration);
+                sleep(sleepMin, sleepMax);
+
+                //stick
                 KeySim.KeyPress((byte)key.six, pressDuration);
-                Thread.Sleep(sleeptime);
-                KeySim.KeyPress((byte)key.seven, pressDuration);
-                Thread.Sleep(sleeptime);
-                KeySim.KeyPress((byte)key.eight, pressDuration);
-                Thread.Sleep(sleeptime);
-                KeySim.KeyPress((byte)key.nine, pressDuration);
-                Thread.Sleep(sleeptime);
-                KeySim.KeyPress((byte)key.zero, pressDuration);
+
+                if(diff.TotalMilliseconds > 20000)
+                {
+                    //cast savage buffs
+                    KeySim.KeyPress((byte)key.eight, pressDuration);
+                    sleep(sleepMin, sleepMax);
+                    KeySim.KeyPress((byte)key.seven, pressDuration);
+                    lastCastSavageBuffsDT = DateTime.Now;
+                }
+
                 Thread.Sleep(1500);
             }
         }

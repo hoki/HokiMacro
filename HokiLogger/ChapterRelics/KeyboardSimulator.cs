@@ -13,11 +13,36 @@ namespace ChapterRelics
 
         #region Windows API Code
 
+        struct INPUT
+        {
+            public UInt32 type;
+            public ushort wVk;
+            public ushort wScan;
+            public UInt32 dwFlags;
+            public UInt32 time;
+            public UIntPtr dwExtraInfo;
+            public UInt32 uMsg;
+            public ushort wParamL;
+            public ushort wParamH;
+
+        }
+
+        enum SendInputFlags
+        {
+            KEYEVENTF_EXTENDEDKEY = 0x0001,
+            KEYEVENTF_KEYUP = 0x0002,
+            KEYEVENTF_UNICODE = 0x0004,
+            KEYEVENTF_SCANCODE = 0x0008,
+        }
+
         public const int KEYEVENTF_EXTENDEDKEY = 0x1;
         public const int KEYEVENTF_KEYUP = 0x2;
 
         [DllImport("user32.dll")]
-        public static extern void keybd_event(byte key, byte scan, int flags, int extraInfo); 
+        public static extern void keybd_event(byte key, byte scan, int flags, int extraInfo);
+
+        [DllImport("user32.dll")]
+        static extern UInt32 SendInput(UInt32 nInputs, [MarshalAs(UnmanagedType.LPArray, SizeConst = 1)] INPUT[] pInputs, Int32 cbSize);
 
         #endregion
 

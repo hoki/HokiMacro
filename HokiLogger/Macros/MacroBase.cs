@@ -20,8 +20,14 @@ namespace HokiMacroLib
         protected IMacroToControlDependencyService _macroControlService;
         protected Dictionary<key, Action<KeyArgs>> EventRegistrar = new Dictionary<key, Action<KeyArgs>>();
         protected bool ProcessMacros = false;
+        protected Random rand = new Random();
 
         public abstract void registerMacros();
+
+        protected virtual void sleep(int min, int max)
+        {
+            Thread.Sleep(rand.Next(min, max));
+        }
 
         protected virtual void toggleOnOff(KeyArgs keyArgs)
         {
