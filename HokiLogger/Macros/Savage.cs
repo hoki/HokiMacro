@@ -15,10 +15,11 @@ namespace HokiMacroLib
 
         public override void registerMacros()
         {
-            EventRegistrar.Add(key.E, asyncMainSavageAttackSequence);
-            EventRegistrar.Add(key.tab, toggleOnOff);
-            EventRegistrar.Add(key.Q, cancelQueue);
-            EventRegistrar.Add(key.R, cancelQueue);
+            //Register defined in Extensions class
+            EventRegistrar.Register(key.E, asyncMainSavageAttackSequence);
+            EventRegistrar.Register(key.tab, toggleOnOff);
+            EventRegistrar.Register(key.Q, cancelQueue);
+            EventRegistrar.Register(key.R, cancelQueue);
         }
 
         private void cancelQueue(KeyArgs keyArgs)
@@ -76,29 +77,32 @@ namespace HokiMacroLib
             diff = DateTime.Now - lastCastSavageBuffsDT;
             if (!keyArgs.KeyUp && ProcessMacros)
             {
-
-                KeySim.KeyPress((byte)key.three, pressDuration);
-                sleep(sleepMin, sleepMax);
-                KeySim.KeyPress((byte)key.four, pressDuration);
-                sleep(sleepMin, sleepMax);
-                KeySim.KeyPress((byte)key.four, pressDuration);
-                sleep(sleepMin, sleepMax);
-                KeySim.KeyPress((byte)key.four, pressDuration);
-                sleep(sleepMin, sleepMax);
-
-                //stick
-                KeySim.KeyPress((byte)key.six, pressDuration);
-
-                if(diff.TotalMilliseconds > 20000)
+                if (diff.TotalMilliseconds > 28000)
                 {
                     //cast savage buffs
-                    KeySim.KeyPress((byte)key.eight, pressDuration);
+                    KeySim.KeyPress(key.nine, pressDuration);
                     sleep(sleepMin, sleepMax);
-                    KeySim.KeyPress((byte)key.seven, pressDuration);
+                    KeySim.KeyPress(key.zero, pressDuration);
                     lastCastSavageBuffsDT = DateTime.Now;
                 }
 
-                Thread.Sleep(1500);
+                //stick
+                KeySim.KeyPress(key.six, pressDuration);
+                sleep(sleepMin, sleepMax);
+                KeySim.KeyPress(key.six, pressDuration);
+                sleep(sleepMin, sleepMax);
+                KeySim.KeyPress(key.three, pressDuration);
+                sleep(sleepMin, sleepMax);
+                KeySim.KeyPress(key.four, pressDuration);
+                sleep(sleepMin, sleepMax);
+                KeySim.KeyPress(key.four, pressDuration);
+                sleep(sleepMin, sleepMax);
+                KeySim.KeyPress(key.four, pressDuration);
+                sleep(sleepMin, sleepMax);
+
+                
+
+                Thread.Sleep(200);
             }
         }
         #endregion MainSavageAttackSequence

@@ -97,7 +97,7 @@ namespace HokiMacro.Debug
                     case key.nine: returnString = "Main 9 ("; break;
                     case key.zero: returnString = "Main 0 )"; break;
                     case key.dash: returnString = "Main - _"; break;
-                    case key.plus: returnString = "Main + ="; break;
+                    case key.equals: returnString = "Main + ="; break;
                     case key.backspace: returnString = "Backspace"; break;
 
                     case key.tab: returnString = "Tab"; break;

@@ -7,12 +7,35 @@ namespace ChapterRelics
 {
     public class KeyArgs
     {
-        public byte KeyCode { get; set; }
+        private byte _keyCode;
+        public byte KeyCode
+        {
+            get
+            {
+                return _keyCode;
+            }
+            set
+            {
+                _keyCode = value;
+                try
+                {
+                    _key = (key)value;
+                    _dxkey = Keys.GetDxKey(_key);
+                }
+                catch (Exception) { /* swallow */ }
+            }
+        }
         public bool Control { get; set; }
         public bool Shift { get; set; }
         public bool Alt { get; set; }
         public bool CapsLock { get; set; }
         public bool KeyUp { get; set; }
+
+        private key _key;
+        public key key { get { return _key; } }
+
+        private dxKey _dxkey;
+        public dxKey dxKey { get { return _dxkey; } }
     }
 
 

@@ -18,7 +18,13 @@ namespace HokiMacroLib
         }
 
         protected IMacroToControlDependencyService _macroControlService;
-        protected Dictionary<key, Action<KeyArgs>> EventRegistrar = new Dictionary<key, Action<KeyArgs>>();
+
+        private IDictionary<key, IList<Action<KeyArgs>>> _eventRegistrar = new Dictionary<key, IList<Action<KeyArgs>>>();
+        public virtual IDictionary<key, IList<Action<KeyArgs>>> EventRegistrar
+        {
+            get { return _eventRegistrar; }
+        }
+
         protected bool ProcessMacros = false;
         protected Random rand = new Random();
 
@@ -35,7 +41,15 @@ namespace HokiMacroLib
                _macroControlService.ToggleOnOffFromMacro();
         }
 
+        
+
+
         #region IControlToMacroDependencyService
+
+        public virtual Action<OnOff> ToggleMacroOnOff
+        {
+            get { return (onOff) => ProcessMacros = (onOff == OnOff.on); }
+        }
 
         /// <summary>
         /// This is the entry point delegate.
@@ -44,16 +58,12 @@ namespace HokiMacroLib
         /// <param name="keyArgs"></param>
         public virtual void KeyboardEventTrigger(KeyArgs keyArgs)
         {
-            Action<KeyArgs> action;
-            if (EventRegistrar.TryGetValue((key)keyArgs.KeyCode, out action))
+            IList<Action<KeyArgs>> actions;
+            if (EventRegistrar.TryGetValue((key)keyArgs.KeyCode, out actions))
             {
-                action(keyArgs);
+                foreach (Action<KeyArgs> action in actions)
+                    action(keyArgs);
             }
-        }
-
-        public virtual Action<OnOff> ToggleMacroOnOff
-        {
-            get { return (onOff) => ProcessMacros = (onOff == OnOff.on); }
         }
 
         #endregion IControlToMacroDependencyService
