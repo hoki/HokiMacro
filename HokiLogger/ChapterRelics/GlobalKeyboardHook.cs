@@ -50,8 +50,7 @@ namespace ChapterRelics
             _threadId = 0;
         }
 
-        public delegate void DelegateToGlobalKeyboardEvent(KeyArgs keyArgs);
-        public DelegateToGlobalKeyboardEvent delToGlobalKeyboardEvent;
+        public Action<KeyArgs> GlobalKeyboardEvent;
 
         protected override int HookCallbackProcedure(int nCode, int wParam, IntPtr lParam)
         {
@@ -71,8 +70,8 @@ namespace ChapterRelics
                 // Is CapsLock on?
                 bool capslock = (GetKeyState(VK_CAPITAL_20) != 0);
 
-                if ((wParam == WM_KEYDOWN_256 || wParam == WM_KEYUP_257) && delToGlobalKeyboardEvent != null)
-                    delToGlobalKeyboardEvent(new KeyArgs
+                if ((wParam == WM_KEYDOWN_256 || wParam == WM_KEYUP_257) && GlobalKeyboardEvent != null)
+                    GlobalKeyboardEvent(new KeyArgs
                     {
                         KeyCode = (byte)keyboardHookStruct.vkCode,
                         Control = control,

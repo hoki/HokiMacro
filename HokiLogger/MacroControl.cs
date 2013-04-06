@@ -21,7 +21,7 @@ namespace HokiMacroLib
             _macros.Add(new Hero(this));
             _macroService = _macros.FirstOrDefault();
             //globalMouseHook.delToGlobalMouseEvent = new GlobalMouseHook.DelegateToGlobalMouseEvent(invokeGlobalMouseEventDelegate);
-            _globalKeyboardHook.delToGlobalKeyboardEvent = (keyArgs) => 
+            _globalKeyboardHook.GlobalKeyboardEvent = (keyArgs) => 
             {
                 if (_macroService != null)
                     _macroService.KeyboardEventTrigger(keyArgs);
