@@ -10,8 +10,8 @@ namespace HokiMacroLib
 {
     public class Savage : MacroBase
     {
-        public Savage(IMacroToControlDependencyService macroControlService)
-            : base(macroControlService) { }
+        public Savage(IMacroToControl macroControlService, string name = "Savage")
+            : base(macroControlService, name) { }
 
         public override void registerMacros()
         {

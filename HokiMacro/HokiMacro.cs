@@ -14,7 +14,7 @@ using HokiMacroLib;
 
 namespace HokiMacro
 {
-    public partial class HokiMacro : Form, IControlToFormDependencyService
+    public partial class HokiMacro : Form, IControlToForm
     {
         public HokiMacro()
         {
@@ -29,7 +29,7 @@ namespace HokiMacro
         /// With multiple layers of shit talking to each other its easy
         /// to forget which layer should do what to which layer.
         /// </summary>
-        IFormToControlDependencyService _controlService;
+        IFormToControl _controlService;
 
         public Action<OnOff> ToggleDisplayOnOff
         {
@@ -58,6 +58,12 @@ namespace HokiMacro
             _controlService = new MacroControl(this);
             _soundOn = new SoundPlayer(@"on.wav");
             _soundOff = new SoundPlayer(@"off.wav");
+            comboBox1.DataSource = _controlService.Macros;
+            comboBox1.DisplayMember = "Name";
+            this.comboBox1.SelectedIndexChanged += (comboSender, comboArgs) => 
+            {
+                _controlService.ChangeMacro((IControlToMacro)comboBox1.SelectedItem);
+            };
         }
 
         public void btnStart_Click(object sender, EventArgs e)

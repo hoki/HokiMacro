@@ -4,15 +4,19 @@ using ChapterRelics;
 
 namespace HokiMacroLib
 {
-    public interface IFormToControlDependencyService
+    public interface IFormToControl
     {
         /// <summary>
         /// Form tells Control -> Hey guy, he clicked teh On/Off button
         /// </summary>
         void ToggleOnOffFromForm();
+
+        IList<IControlToMacro> Macros { get; }
+
+        void ChangeMacro(IControlToMacro macro);
     }
 
-    public interface IControlToFormDependencyService
+    public interface IControlToForm
     {
         /// <summary>
         /// Control tells Form Display -> Oh hi, Macros are On/Off
@@ -20,7 +24,7 @@ namespace HokiMacroLib
         Action<OnOff> ToggleDisplayOnOff { get; }
     }
 
-    public interface IMacroToControlDependencyService
+    public interface IMacroToControl
     {
         /// <summary>
         /// Macro tells Control -> Greetings, he pressed an On/Off key combination
@@ -28,8 +32,13 @@ namespace HokiMacroLib
         void ToggleOnOffFromMacro();
     }
 
-    public interface IControlToMacroDependencyService
+    public interface IControlToMacro
     {
+        /// <summary>
+        /// Name/description of the macro
+        /// </summary>
+        string Name { get; }
+
         /// <summary>
         /// Control tells Macro -> Yo dog, turn off macros
         /// </summary>

@@ -11,16 +11,25 @@ namespace HokiMacroLib
     /// and mouse events to the macro.
     /// Also acts as a central location from turning on and off macros.
     /// </summary>
-    public class MacroControl : IMacroToControlDependencyService, IFormToControlDependencyService
+    public class MacroControl : IMacroToControl, IFormToControl
     {
-        public MacroControl(IControlToFormDependencyService formService)
+        public MacroControl(IControlToForm formService)
         {
             _formService = formService;
-            _macroService = new Savage(this);
+            _macros = new List<IControlToMacro>();
+            _macros.Add(new Savage(this));
+            _macros.Add(new Hero(this));
+            _macroService = _macros.FirstOrDefault();
             //globalMouseHook.delToGlobalMouseEvent = new GlobalMouseHook.DelegateToGlobalMouseEvent(invokeGlobalMouseEventDelegate);
-            _globalKeyboardHook.delToGlobalKeyboardEvent = new GlobalKeyboardHook.DelegateToGlobalKeyboardEvent(_macroService.KeyboardEventTrigger);
+            _globalKeyboardHook.delToGlobalKeyboardEvent = (keyArgs) => 
+            {
+                if (_macroService != null)
+                    _macroService.KeyboardEventTrigger(keyArgs);
+            };
             _globalKeyboardHook.Start();
         }
+
+        private List<IControlToMacro> _macros;
 
         /// <summary>
         /// Chapter Relic
@@ -39,15 +48,17 @@ namespace HokiMacroLib
         /// With multiple layers of shit talking to each other its easy
         /// to forget which layer should do what to which layer.
         /// </summary>
-        private IControlToFormDependencyService _formService;
+        private IControlToForm _formService;
 
         /// <summary>
         /// Limited interface to MacroBase basically.
         /// With multiple layers of shit talking to each other its easy
         /// to forget which layer should do what to which layer.
         /// </summary>
-        private IControlToMacroDependencyService _macroService;
+        private IControlToMacro _macroService;
         private OnOff _onOffState = OnOff.off;
+
+        #region Interface Properties
 
         public void ToggleOnOffFromMacro()
         {
@@ -58,6 +69,21 @@ namespace HokiMacroLib
         {
             toggleOnOff();
         }
+
+        public IList<IControlToMacro> Macros
+        {
+            get { return _macros; }
+        }
+
+        public void ChangeMacro(IControlToMacro macro)
+        {
+            _onOffState = OnOff.off;
+            _formService.ToggleDisplayOnOff(_onOffState);
+            _macroService.ToggleMacroOnOff(_onOffState);
+            _macroService = macro;
+        }
+
+        #endregion Interface Properties
 
         private void toggleOnOff()
         {

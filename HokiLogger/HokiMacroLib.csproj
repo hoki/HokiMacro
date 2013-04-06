@@ -63,6 +63,7 @@
     <Compile Include="Extensions.cs" />
     <Compile Include="Interfaces.cs" />
     <Compile Include="ChapterRelics\KeyboardSimulator.cs" />
+    <Compile Include="Macros\Hero.cs" />
     <Compile Include="Macros\MacroBase.cs" />
     <Compile Include="ChapterRelics\MouseSimulator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

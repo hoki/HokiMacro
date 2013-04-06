@@ -8,16 +8,17 @@ using ChapterRelics;
 
 namespace HokiMacroLib
 {
-    public abstract class MacroBase : IControlToMacroDependencyService
+    public abstract class MacroBase : IControlToMacro
     {
-        protected MacroBase(IMacroToControlDependencyService macroControlService)
+        protected MacroBase(IMacroToControl macroControlService, string name)
         {
             _macroControlService = macroControlService;
+            Name = name;
             EventRegistrar.Clear();
             registerMacros();
         }
 
-        protected IMacroToControlDependencyService _macroControlService;
+        protected IMacroToControl _macroControlService;
 
         private IDictionary<key, IList<Action<KeyArgs>>> _eventRegistrar = new Dictionary<key, IList<Action<KeyArgs>>>();
         public virtual IDictionary<key, IList<Action<KeyArgs>>> EventRegistrar
@@ -30,9 +31,12 @@ namespace HokiMacroLib
 
         public abstract void registerMacros();
 
-        protected virtual void sleep(int min, int max)
+        protected virtual void sleep(int min, int max = 0)
         {
-            Thread.Sleep(rand.Next(min, max));
+            if (min < max)
+                Thread.Sleep(rand.Next(min, max));
+            else
+                Thread.Sleep(min);
         }
 
         protected virtual void toggleOnOff(KeyArgs keyArgs)
@@ -44,7 +48,7 @@ namespace HokiMacroLib
         
 
 
-        #region IControlToMacroDependencyService
+        #region Interface Properties
 
         public virtual Action<OnOff> ToggleMacroOnOff
         {
@@ -66,6 +70,8 @@ namespace HokiMacroLib
             }
         }
 
-        #endregion IControlToMacroDependencyService
+        public string Name { get; private set; }
+
+        #endregion Interface Properties
     }
 }
