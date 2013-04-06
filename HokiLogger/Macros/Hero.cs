@@ -21,6 +21,7 @@ namespace HokiMacroLib
             EventRegistrar.Register(key.five, spearSide);
             EventRegistrar.Register(key.tab, toggleOnOff);
             EventRegistrar.Register(key.Q, cancelQueue);
+            EventRegistrar.Register(key.Q, bodyguard);
             EventRegistrar.Register(key.R, cancelQueue);
         }
 
@@ -62,9 +63,9 @@ namespace HokiMacroLib
                 sleep(sleepMin, sleepMax);
                 KeySim.KeyPress(key.zero_numpad, pressDuration);
                 sleep(sleepMin, sleepMax);
-                KeySim.KeyPress(key.eight_numpad, pressDuration);
+                KeySim.KeyPress(key.seven_numpad, pressDuration);
                 sleep(sleepMin, sleepMax);
-                KeySim.KeyPress(key.nine_numpad, pressDuration);
+                KeySim.KeyPress(key.eight_numpad, pressDuration);
             }
         }
 
@@ -98,6 +99,7 @@ namespace HokiMacroLib
             KeySim.KeyPress(key.one_numpad, pressDuration);
             sleep(sleepMin, sleepMax);
             KeySim.KeyPress(key.one_numpad, pressDuration);
+            sleep(1000);
         }
 
         #endregion Slam
@@ -164,7 +166,7 @@ namespace HokiMacroLib
             int sleepMax = 18;
             KeySim.KeyPress(key.eight, pressDuration);
             sleep(sleepMin, sleepMax);
-            KeySim.KeyPress(key.zero_numpad, pressDuration);
+            KeySim.KeyPress(key.nine_numpad, pressDuration);
             sleep(sleepMin, sleepMax);
             KeySim.KeyPress(key.four_numpad, pressDuration);
             sleep(sleepMin, sleepMax);
@@ -202,7 +204,7 @@ namespace HokiMacroLib
             int sleepMax = 18;
             KeySim.KeyPress(key.eight, pressDuration);
             sleep(sleepMin, sleepMax);
-            KeySim.KeyPress(key.zero_numpad, pressDuration);
+            KeySim.KeyPress(key.nine_numpad, pressDuration);
             sleep(sleepMin, sleepMax);
             KeySim.KeyPress(key.five_numpad, pressDuration);
             sleep(sleepMin, sleepMax);
